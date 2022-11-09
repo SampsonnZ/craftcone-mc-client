@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "calebzhou.craftcone.mixins",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "mTitleScreen"
+  ],
+  "mixins": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
