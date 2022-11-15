@@ -1,5 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.7.21'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.7.21'
 }
 architectury {
     common(rootProject.enabled_platforms.split(","))
@@ -9,7 +10,11 @@ loom {
     accessWidenerPath = file("src/main/resources/craftcone.accesswidener")
 
 }
-
+configurations {
+    includeImplementation
+    include.extendsFrom includeImplementation
+    implementation.extendsFrom includeImplementation
+}
 dependencies {
     // We depend on fabric loader here to use the fabric @Environment annotations and get the mixin dependencies
     // Do NOT use other classes from fabric loader
@@ -17,6 +22,11 @@ dependencies {
     // Remove the next line if you don't want to depend on the API
     modApi "dev.architectury:architectury:${rootProject.architectury_version}"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    implementation 'org.xerial:sqlite-jdbc:3.39.4.0'
+    includeImplementation 'org.xerial:sqlite-jdbc:3.39.4.0'
+    //7z-LZMA de/compression library
+    includeImplementation 'org.tukaani:xz:1.9'
 }
 
 publishing {

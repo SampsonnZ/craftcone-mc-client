@@ -6,6 +6,16 @@
     "mTitleScreen"
   ],
   "mixins": [
+    "AccessCompoundTag",
+    "AccessLevelStorageAccess",
+    "mExportRegion2Json",
+    "mSaveSpaceReducer",
+    "mSaveSpaceReducer2",
+    "mSaveSpaceReducer3",
+    "mSaveSpaceReducer4",
+    "mSaveSpaceReducer5",
+    "mSaveSpaceReducer6",
+    "mUseConeEntityStorage"
   ],
   "injectors": {
     "defaultRequire": 1

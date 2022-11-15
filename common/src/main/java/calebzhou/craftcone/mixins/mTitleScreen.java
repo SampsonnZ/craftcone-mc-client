@@ -1,6 +1,6 @@
 package calebzhou.craftcone.mixins;
 
-import calebzhou.craftcone.screen.CentralServerSelectScreen;
+import calebzhou.craftcone.gui.CentralServerSelectScreen;
 import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.Screen;

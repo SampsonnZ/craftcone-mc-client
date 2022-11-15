@@ -1,11 +1,19 @@
-package calebzhou.craftcone.screen
+package calebzhou.craftcone.gui
 
+import calebzhou.craftcone.consts.FileConsts
+import calebzhou.craftcone.logger
+import calebzhou.craftcone.model.CentralServerDataStorage
 import com.mojang.blaze3d.vertex.PoseStack
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.components.Button
 import net.minecraft.client.gui.screens.Screen
 import net.minecraft.network.chat.CommonComponents
 import net.minecraft.network.chat.Component
+import org.apache.commons.io.FileUtils
+import java.io.File
+import java.nio.charset.StandardCharsets
 
 /**
  * Created  on 2022-11-09,11:52.
@@ -15,7 +23,25 @@ class CentralServerSelectScreen(val lastScreen: Screen): Screen(Component.transl
     private lateinit var editButton: Button
     private lateinit var selectButton: Button
     private lateinit var deleteButton: Button
+    private var serverDataStorage = CentralServerDataStorage(listOf())
+    private val serversFile = File(FileConsts.CRAFTCONE_FOLDER, "central_servers.json")
     init {
+        if(!serversFile.exists()){
+            serversFile.createNewFile()
+        }else{
+            try {
+                val json = FileUtils.readFileToString(serversFile,StandardCharsets.UTF_8)
+                serverDataStorage = Json.decodeFromString(json)
+                logger.info("Loaded ${serverDataStorage.serverList.size} central servers")
+            } catch (e: Exception) {
+                logger.error("Failed to load central server json")
+                e.printStackTrace()
+            }
+        }
+
+
+
+
 
     }
 
@@ -65,7 +91,7 @@ class CentralServerSelectScreen(val lastScreen: Screen): Screen(Component.transl
         this.renderBackground(poseStack)
         drawCenteredString(
             poseStack,
-            font, "craftCONE Server List", width / 2, 20, 16777215
+            font, "craftCONE Central Servers", width / 2, 20, 16777215
         )
 
         super.render(poseStack, mouseX, mouseY, partialTick)
